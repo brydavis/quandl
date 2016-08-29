@@ -14,7 +14,7 @@ import (
 
 func main() {
 	Key("key.txt")
-	Get(os.Args[1])
+	Req(os.Args[1])
 }
 
 func Key(filename string) {
@@ -24,7 +24,7 @@ func Key(filename string) {
 	fmt.Println(k)
 }
 
-func Get(url string) {
+func Req(url string) {
 	res, _ := http.Get(url)
 
 	defer res.Body.Close()
@@ -33,6 +33,7 @@ func Get(url string) {
 	switch path.Ext(os.Args[1]) {
 	case ".csv":
 		r := csv.NewReader(strings.NewReader(string(body)))
+
 		result, _ := r.ReadAll()
 
 		data := []map[string]interface{}{}
